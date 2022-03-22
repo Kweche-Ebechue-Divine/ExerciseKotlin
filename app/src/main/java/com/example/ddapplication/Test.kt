@@ -29,7 +29,7 @@ fun MainView() {
         topBar = {TopBarView(navController) },
     bottomBar = { BottomBarView(navController) },
 
-
+/* Displace of different views */
                 
         ){
         NavHost(navController = navController, startDestination = "home") {
@@ -50,6 +50,10 @@ fun MainView() {
                 MenuView()
             }
 
+            composable(route = "shopping") {
+                AddCart()
+            }
+
 
 
         }
@@ -57,7 +61,7 @@ fun MainView() {
    }
 }
 
-
+/* The top bar navigation view */
 
 @Composable
 fun TopBarView(navController: NavHostController) {
@@ -73,29 +77,24 @@ fun TopBarView(navController: NavHostController) {
 
     ) {
 
-        Icon(painter = painterResource(id = R.drawable.menu_icon),
+        Icon(painter = painterResource(id = R.drawable.home_icon),
             contentDescription="",
-            modifier=Modifier.clickable { navController.navigate("menu") }
+            modifier=Modifier.clickable { navController.navigate("home") }
         )
 
-          OutlinedTextField(
-              value = "",
-              onValueChange = {},
-          trailingIcon = {
 
-                  Icon(painter = painterResource(id = R.drawable.search),
-                      contentDescription="")
-},
-              modifier = Modifier
-                  .border(1.dp, Color.Black)
-                  .background(Color.White)
+        Icon(painter = painterResource(id = R.drawable.shopping),
+            contentDescription="",
+            modifier=Modifier.clickable { navController.navigate("shopping") }
+        )
 
-              )
 
 
     }
 
 }
+
+/* The bottom bar navigation view */
 @Composable
 fun BottomBarView(navController: NavHostController) {
    Row(
@@ -108,9 +107,9 @@ fun BottomBarView(navController: NavHostController) {
 
 
    ) {
-       Icon(painter = painterResource(id = R.drawable.home_icon),
+       Icon(painter = painterResource(id = R.drawable.menu_icon),
            contentDescription="",
-       modifier=Modifier.clickable { navController.navigate( "home") }
+       modifier=Modifier.clickable { navController.navigate( "menu") }
        )
 
        Icon(painter = painterResource(id = R.drawable.info_icon),
@@ -124,10 +123,11 @@ fun BottomBarView(navController: NavHostController) {
                    modifier=Modifier.clickable { navController.navigate("login") }
        )
 
+
    }
 }
 
-
+/* Different images for the menu view */
 @Composable
 fun MenuView() {
     val images= arrayOf(
@@ -159,25 +159,31 @@ fun Img(res: Int) {
     modifier= Modifier
         .size(380.dp,380.dp)
 
+
         )
 
 }
 
 
 
-
+/* The information view of the application */
 @Composable
 fun InfoView() {
-    Column() {
+    Column(
+        modifier=Modifier
+            .padding(15.dp),
+
+
+    ) {
         Text(text="INFORMATION PAGE OF THE APPLICATION")
         Text(text="Welcome to the information page of this food ordering application")
-        Text(text="In this restaurant we sell sell pizza, sushi, and burger")
+        Text(text="In this restaurant we sell  pizza, sushi, and burger")
         Text(text="Navigate to the menu list to view the varieties of the items we offer")
-        Text(text="-After browsing the menu list, you can navigate to the other options")
-        Text(text="-By using this application you can login using your user´s account")
-        Text(text="-You can browse the menu page of food items offered by this restaurant")
-        Text(text="After browsing the menu list, you can order a food item of your choice")
-        Text(text=" Login and fill the order form if you want place an order")
+        Text(text="After browsing the menu list, you can navigate to the other options")
+        Text(text="In order to place an order, you need to login using your user´s account")
+        Text(text="Once you are login, you can fill the order form to place an order")
+        Text(text="After filling the order form you proceed to make the payment")
+        Text(text="Thank you for using this restaurant platform")
     }
 
 
@@ -261,14 +267,79 @@ fun LoginView(loginViewModel:NewViewModel) {
 
         }
 
-        OutlinedButton(onClick = { /*For login to firebase*/ }) {
-            Text(text= "SignUp")
 
-        }
 
     }
 
 }
+
+@Composable
+fun AddCart () {
+
+AddView()
+    
+}
+
+
+@Composable
+fun AddView() {
+
+    var productVM: viewModel(LocalContext.current as ComponentActivity)
+    var item by remember {
+        mutableStateOf("" )
+
+    }
+
+    var quantity by remember {
+        mutableStateOf("" )}
+
+    var price by remember {
+        mutableStateOf("" )}
+
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+
+
+
+
+    ) {
+        Text(text= "ADD TO CART")
+        OutlinedTextField(
+            value = item ,
+            onValueChange = { item=it },
+            label ={ Text(text="Item ")}
+        )
+
+        OutlinedTextField(
+            value = quantity,
+            onValueChange ={ quantity= it },
+            label ={ Text(text="Quantity")},
+        )
+
+
+        OutlinedTextField(
+            value = price,
+            onValueChange ={ price= it },
+            label ={ Text(text="Price")},
+        )
+
+        OutlinedButton(onClick = {productVM.products.add(product(item.value,quantity.value,price.toIn())) }) {
+            Text(text= "Add to cart")
+
+    }
+    }
+
+}
+
+
+
+
 
 
 
@@ -288,14 +359,7 @@ fun OrderView() {
     var city by remember {
         mutableStateOf("" )}
 
-    var country by remember {
-        mutableStateOf("" )}
 
-    var email by remember {
-        mutableStateOf("" )}
-
-    var telephone by remember {
-        mutableStateOf("" )}
 
 
     Column(
@@ -335,32 +399,7 @@ fun OrderView() {
             label ={ Text(text="City")},
         )
 
-        OutlinedTextField(
-            value = country,
-            onValueChange ={country= it },
-            label ={ Text(text="Country")},
-        )
 
-        OutlinedTextField(
-            value = email,
-            onValueChange ={ email= it },
-            label ={ Text(text="Email")},
-        )
-
-        OutlinedTextField(
-            value = telephone,
-            onValueChange ={ telephone= it },
-            label ={ Text(text="Telephone")}
-        )
-        OutlinedButton(onClick = { }) {
-            Text(text= "Login")
-
-        }
-
-        OutlinedButton(onClick = { /*For login to firebase*/ }) {
-            Text(text= "SignUp")
-
-        }
 
     }
 

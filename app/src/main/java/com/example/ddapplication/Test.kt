@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,11 +38,12 @@ fun MainView() {
                }
 
             composable(route = "info") {
+                InfoView()
 
                   }
 
             composable(route = "login") {
-               LoginView()
+               LoginMainView()
             }
 
             composable(route = "menu") {
@@ -125,18 +127,6 @@ fun BottomBarView(navController: NavHostController) {
    }
 }
 
-@Composable
-fun HomeView() {
-    Text(
-        text = "FOOD APPLICATION",
-    fontSize = 42.sp,
-        modifier = Modifier.background(Color.Green)
-
-
-    )
-
-
-}
 
 @Composable
 fun MenuView() {
@@ -168,44 +158,223 @@ fun Img(res: Int) {
     Image (painter = painterResource(res), contentDescription ="",
     modifier= Modifier
         .size(380.dp,380.dp)
+
         )
 
 }
 
+
+
+
 @Composable
-fun LoginView() {
-    var email by remember{mutableStateOf("")}
-    var pw by remember{mutableStateOf("")}
+fun InfoView() {
+    Column() {
+        Text(text="INFORMATION PAGE OF THE APPLICATION")
+        Text(text="Welcome to the information page of this food ordering application")
+        Text(text="In this restaurant we sell sell pizza, sushi, and burger")
+        Text(text="Navigate to the menu list to view the varieties of the items we offer")
+        Text(text="-After browsing the menu list, you can navigate to the other options")
+        Text(text="-By using this application you can login using your user´s account")
+        Text(text="-You can browse the menu page of food items offered by this restaurant")
+        Text(text="After browsing the menu list, you can order a food item of your choice")
+        Text(text=" Login and fill the order form if you want place an order")
+    }
+
+
+}
+
+@Composable
+fun HomeView() {
+
+
+    Column() {
+
+        Text(text= "CUSTOMER FOOD ORDERING APPLICTION")
+
+        Image (painter = painterResource(R.drawable.reslogo), contentDescription ="",
+
+            modifier= Modifier
+                .fillMaxSize()
+
+        )
+
+    }
+}
+
+@Composable
+fun LoginMainView() {
+    val loginViewModel =viewModel<NewViewModel>()
+    if(loginViewModel.username.value.isEmpty()){
+
+        LoginView(loginViewModel)
+
+    } else {
+    Text(text = "Successful login")
+        OrderView()
+
+    }
+
+}
+
+
+
+
+@Composable
+fun LoginView(loginViewModel:NewViewModel) {
+    var email by remember {
+        mutableStateOf("" )
+
+    }
+
+    var password by remember {
+        mutableStateOf("" )}
+
+
+
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp),
+            .height(300.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
 
 
+
+
     ) {
-    OutlinedTextField(
-        value = "Email",
-        onValueChange ={email= it},
-        label ={ Text(text="Email")}
-    )
-        
+        Text(text= "LOGIN PAGE")
+      OutlinedTextField(
+          value = email ,
+          onValueChange = { email=it },
+          label ={ Text(text="Email")}
+      )
+
 
         OutlinedTextField(
-            value = "pw",
-            onValueChange ={pw= it},
+            value = password,
+            onValueChange ={ password= it },
             label ={ Text(text="Password")},
             visualTransformation = PasswordVisualTransformation())
-        OutlinedButton(onClick = { /*For login to firebase*/ }) {
+        OutlinedButton(onClick = {loginViewModel.userLogin(email,password) }) {
             Text(text= "Login")
+
+        }
+
+        OutlinedButton(onClick = { /*For login to firebase*/ }) {
+            Text(text= "SignUp")
 
         }
 
     }
 
 }
+
+
+
+@Composable
+fun OrderView() {
+    var firstname by remember {
+        mutableStateOf("" )
+
+    }
+
+    var lastname by remember {
+        mutableStateOf("" )}
+
+    var address by remember {
+        mutableStateOf("" )}
+
+    var city by remember {
+        mutableStateOf("" )}
+
+    var country by remember {
+        mutableStateOf("" )}
+
+    var email by remember {
+        mutableStateOf("" )}
+
+    var telephone by remember {
+        mutableStateOf("" )}
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp),
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+
+
+
+
+    ) {
+        Text(text= "ORDER FORM")
+        OutlinedTextField(
+            value = firstname ,
+            onValueChange = { firstname=it },
+            label ={ Text(text="First name")}
+        )
+
+
+        OutlinedTextField(
+            value = lastname,
+            onValueChange ={ lastname= it },
+            label ={ Text(text="Last name")},
+            )
+
+        OutlinedTextField(
+            value = address,
+            onValueChange ={ address= it },
+            label ={ Text(text="Address")},
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange ={ city= it },
+            label ={ Text(text="City")},
+        )
+
+        OutlinedTextField(
+            value = country,
+            onValueChange ={country= it },
+            label ={ Text(text="Country")},
+        )
+
+        OutlinedTextField(
+            value = email,
+            onValueChange ={ email= it },
+            label ={ Text(text="Email")},
+        )
+
+        OutlinedTextField(
+            value = telephone,
+            onValueChange ={ telephone= it },
+            label ={ Text(text="Telephone")}
+        )
+        OutlinedButton(onClick = { }) {
+            Text(text= "Login")
+
+        }
+
+        OutlinedButton(onClick = { /*For login to firebase*/ }) {
+            Text(text= "SignUp")
+
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

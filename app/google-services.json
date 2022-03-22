@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "776251358021",
+    "project_id": "dchatapplication-e5755",
+    "storage_bucket": "dchatapplication-e5755.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776251358021:android:798e335d4575ad6da21c2c",
+        "android_client_info": {
+          "package_name": "com.example.dchatapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776251358021-b536uahms9p11tcqsrqut466jskicuv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBotM_-g2QUgFOCMohxi04yRmGoIs9HSsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776251358021-b536uahms9p11tcqsrqut466jskicuv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776251358021:android:9543e0745952c8c4a21c2c",
+        "android_client_info": {
+          "package_name": "com.example.ddapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776251358021-b536uahms9p11tcqsrqut466jskicuv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBotM_-g2QUgFOCMohxi04yRmGoIs9HSsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776251358021-b536uahms9p11tcqsrqut466jskicuv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

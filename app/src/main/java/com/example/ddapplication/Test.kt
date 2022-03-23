@@ -284,7 +284,7 @@ AddView()
 @Composable
 fun AddView() {
 
-    var productVM: viewModel(LocalContext.current as ComponentActivity)
+
     var item by remember {
         mutableStateOf("" )
 
@@ -329,7 +329,7 @@ fun AddView() {
             label ={ Text(text="Price")},
         )
 
-        OutlinedButton(onClick = {productVM.products.add(product(item.value,quantity.value,price.toIn())) }) {
+        OutlinedButton(onClick = { }) {
             Text(text= "Add to cart")
 
     }
@@ -393,11 +393,11 @@ fun OrderView() {
             label ={ Text(text="Address")},
         )
 
-        OutlinedTextField(
-            value = city,
-            onValueChange ={ city= it },
-            label ={ Text(text="City")},
-        )
+
+        OutlinedButton(onClick = { }) {
+            Text(text= "Send")
+
+        }
 
 
 

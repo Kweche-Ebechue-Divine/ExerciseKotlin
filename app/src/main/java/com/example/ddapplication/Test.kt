@@ -195,7 +195,7 @@ fun HomeView() {
 
     Column() {
 
-        Text(text= "CUSTOMER FOOD ORDERING APPLICTION")
+        Text(text= "CUSTOMER FOOD ORDERING APPLICATION")
 
         Image (painter = painterResource(R.drawable.reslogo), contentDescription ="",
 
@@ -359,13 +359,28 @@ fun OrderView() {
     var city by remember {
         mutableStateOf("" )}
 
+    var email by remember {
+        mutableStateOf("" )}
+
+    var phone by remember {
+        mutableStateOf("" )}
+
+    var item by remember {
+        mutableStateOf("" )}
+
+    var quantity by remember {
+        mutableStateOf("" )}
+
+    var amount by remember {
+        mutableStateOf("" )}
+
 
 
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .height(300.dp),
+            .height(600.dp),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
 
@@ -391,6 +406,36 @@ fun OrderView() {
             value = address,
             onValueChange ={ address= it },
             label ={ Text(text="Address")},
+        )
+
+        OutlinedTextField(
+            value = city,
+            onValueChange ={ city= it },
+            label ={ Text(text="City")},
+        )
+
+        OutlinedTextField(
+            value = email,
+            onValueChange ={ email= it },
+            label ={ Text(text="Email")},
+        )
+        OutlinedTextField(
+            value = phone,
+            onValueChange ={ phone= it },
+            label ={ Text(text="Phone")},
+        )
+
+        OutlinedTextField(
+            value = item,
+            onValueChange ={ item= it },
+            label ={ Text(text="Item")},
+        )
+
+
+        OutlinedTextField(
+            value = amount,
+            onValueChange ={ amount= it },
+            label ={ Text(text="Amount")},
         )
 
 
